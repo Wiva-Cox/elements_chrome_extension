@@ -6,13 +6,27 @@
   </head>
   <body>
     <h1>Elements</h1>
+
     <p>Size of the border</p>
+
     <input id="size" title="Size" placeholder="0.1" />
+
     <p>Color of the border</p>
+
+    <div class="container">
+      <div class="square" id="red" style="background-color: red"></div>
+      <div class="square" id="green" style="background-color: green"></div>
+      <div class="square" id="blue" style="background-color: blue"></div>
+      <div class="square" id="white" style="background-color: white"></div>
+      <div class="square" id="black" style="background-color: black"></div>
+      <div class="square" id="yellow" style="background-color: yellow"></div>
+    </div>
+
     <input id="color" title="Color" placeholder="red" />
-    <p><br /></p>
-    <button id="elements_Btn">Show elements</button>
-    <button id="hideElements_Btn">Hide elements</button>
+
+    <button id="elements_Btn" class="on">Show elements</button>
+    <button id="hideElements_Btn" class="off">Hide elements</button>
+
     <script src="popup.js"></script>
   </body>
 </html>
