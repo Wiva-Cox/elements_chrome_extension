@@ -63,3 +63,16 @@ hideElementsBtn.addEventListener('click', () => {
         });
     });
 });
+
+// Функция для обновления значения инпута color
+function updateColorInput(event) {
+    const square = event.target;
+    const color = square.style.backgroundColor;
+    colorInput.value = color; // Обновляем значение инпута
+}
+
+// Получаем все квадраты и добавляем к ним обработчики событий
+const squares = document.querySelectorAll('.square');
+squares.forEach(square => {
+    square.addEventListener('click', updateColorInput);
+});

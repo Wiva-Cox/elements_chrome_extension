@@ -46,5 +46,5 @@ p {
 .square {
     width: 20px; /* Ширина каждого квадрата */
     height: 20px; /* Высота каждого квадрата */
-    border: 5px;
+    border: 1px solid black;
 }
