@@ -10,7 +10,6 @@ button {
     margin-top: 10px;
     width:80%;
     color:white;
-    background:linear-gradient(#789DE5, #1d60e5);
     border-width:0px;
     border-radius:20px;
     padding:5px;
@@ -18,10 +17,10 @@ button {
     cursor:pointer;
 }
 .on {
-    background:linear-gradient(#789DE5, #1d60e5);
+    background-image: linear-gradient(to right, #2b5876 0%, #4e4376  51%, #2b5876  100%);
 }
 .off {
-    background:linear-gradient(red, orange);
+    background-image: linear-gradient(to right, #e52d27 0%, #b31217  51%, #e52d27  100%);
 }
 
 input {
