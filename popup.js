@@ -1,9 +1,10 @@
 // Получаем элементы из DOM
 const sizeInput = document.getElementById('size');
 const colorInput = document.getElementById('color');
-const elementsBtn = document.getElementById('elements_Btn');
-const hideElementsBtn = document.getElementById('hideElements_Btn');
-
+//const elementsBtn = document.getElementById('elements_Btn');
+//const hideElementsBtn = document.getElementById('hideElements_Btn');
+const toggleBtn = document.getElementById('toggleBtn');
+var showingElements = false
 // Переменная для хранения ссылки на элемент <style>
 let customStyleElement = null;
 
@@ -38,7 +39,7 @@ function removeCustomStyle() {
     }
 }
 
-// Добавляем обработчик события на кнопку "Show elements"
+/*// Добавляем обработчик события на кнопку "Show elements"
 elementsBtn.addEventListener('click', () => {
     const sizeValue = sizeInput.value || sizeInput.placeholder;
     const colorValue = colorInput.value || colorInput.placeholder;
@@ -52,16 +53,39 @@ elementsBtn.addEventListener('click', () => {
         });
     });
 });
+*/
+// Добавляем обработчик события на кнопку "Show elements"
+toggleBtn.addEventListener('click', () => {
+    if (showingElements === false) {
+        showingElements = true;
+        toggleBtn.classList.remove("showElements");
+        toggleBtn.classList.add("hideElements");
+        toggleBtn.textContent = "Hide borders";
+        const sizeValue = sizeInput.value || sizeInput.placeholder;
+        const colorValue = colorInput.value || colorInput.placeholder;
 
-// Добавляем обработчик события на кнопку "Hide elements"
-hideElementsBtn.addEventListener('click', () => {
-    // Удаление стиля с текущей вкладки
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        chrome.scripting.executeScript({
-            target: { tabId: tabs[0].id },
-            func: removeCustomStyle
+        // Инъекция стиля на текущую вкладку
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            chrome.scripting.executeScript({
+                target: { tabId: tabs[0].id },
+                func: addCustomStyle,
+                args: [sizeValue, colorValue]
         });
     });
+    }
+    else {
+        showingElements = false;
+        toggleBtn.classList.remove("hideElements");
+        toggleBtn.classList.add("showElements");
+        toggleBtn.textContent = "Show borders";
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            chrome.scripting.executeScript({
+                target: { tabId: tabs[0].id },
+                func: removeCustomStyle
+            });
+        });
+    }
+    console.log(showingElements);
 });
 
 // Функция для обновления значения инпута color

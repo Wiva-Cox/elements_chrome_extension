@@ -6,7 +6,7 @@ body {
     align-items: center; /* Центрируем контейнер по вертикали */
 }
 
-button {
+.btn {
     margin-top: 10px;
     margin-bottom: 10px;
     width:80%;
@@ -19,18 +19,18 @@ button {
     padding: 10px 20px;
     font-size: 14px;
     font-weight: bold;
-    background-color: linear-gradient(to right, #2b5876 0%, #4e4376  51%, #2b5876  100%);
+    background-color: darkgrey;
     transition: background-color 0.1s ease, border 0.1s ease; /* Плавный переход */
 }
 
-button:hover {
+.btn:hover {
     border: 2px solid black; /* Граница появляется при наведении */
 }
 
-.on {
+.showElements {
     background-image: linear-gradient(to right, #2b5876 0%, #4e4376  51%, #2b5876  100%);
 }
-.off {
+.hideElements {
     background-image: linear-gradient(to right, #e52d27 0%, #b31217  51%, #e52d27  100%);
 }
 
