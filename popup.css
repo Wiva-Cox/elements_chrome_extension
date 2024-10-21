@@ -7,8 +7,8 @@ body {
 }
 
 button {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     width:80%;
     color:white;
     border: 2px solid grey; /* Без границы по умолчанию */
@@ -35,9 +35,12 @@ button:hover {
 }
 
 input {
+    padding-left: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     font-size: 14px;
     border-width:1px;
-    border-radius:0px;
+    border-radius:10px;
 }
 
 p {
@@ -56,6 +59,9 @@ p {
 .square {
     width: 20px; /* Ширина каждого квадрата */
     height: 20px; /* Высота каждого квадрата */
-    border: 1px solid black;
+    border: 1px solid grey;
     cursor:pointer;
+}
+.square:hover {
+    border: 1px solid black;
 }
