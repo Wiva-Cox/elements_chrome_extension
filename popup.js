@@ -1,33 +1,21 @@
 // Получаем элементы из DOM
 const sizeInput = document.getElementById('size');
 const colorInput = document.getElementById('color');
-//const elementsBtn = document.getElementById('elements_Btn');
-//const hideElementsBtn = document.getElementById('hideElements_Btn');
 const toggleBtn = document.getElementById('toggleBtn');
-var showingElements = false
-// Переменная для хранения ссылки на элемент <style>
-let customStyleElement = null;
+let showingElements = false;
 
 // Функция для добавления нового стиля
 function addCustomStyle(size, color) {
-    // Проверяем, есть ли уже созданный стиль, и удаляем его
     let styleElement = document.getElementById('custom-css-style');
     if (styleElement) {
         styleElement.remove();
     }
 
-    // Создаем новый элемент <style>
     styleElement = document.createElement('style');
     styleElement.id = 'custom-css-style';
     styleElement.type = 'text/css';
-
-    // Формируем CSS-правило
     const cssRule = `* { outline: ${size}px solid ${color} !important; }`;
-
-    // Добавляем CSS-правило в элемент <style>
     styleElement.appendChild(document.createTextNode(cssRule));
-
-    // Добавляем элемент <style> в <head> документа
     document.head.appendChild(styleElement);
 }
 
@@ -39,45 +27,38 @@ function removeCustomStyle() {
     }
 }
 
-/*// Добавляем обработчик события на кнопку "Show elements"
-elementsBtn.addEventListener('click', () => {
-    const sizeValue = sizeInput.value || sizeInput.placeholder;
-    const colorValue = colorInput.value || colorInput.placeholder;
-
-    // Инъекция стиля на текущую вкладку
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        chrome.scripting.executeScript({
-            target: { tabId: tabs[0].id },
-            func: addCustomStyle,
-            args: [sizeValue, colorValue]
-        });
-    });
-});
-*/
-// Добавляем обработчик события на кнопку "Show elements"
-toggleBtn.addEventListener('click', () => {
-    if (showingElements === false) {
-        showingElements = true;
-        toggleBtn.classList.remove("showElements");
-        toggleBtn.classList.add("hideElements");
-        toggleBtn.textContent = "Hide borders";
+// Функция для включения/обновления границ
+function applyBorders() {
+    if (showingElements) {
         const sizeValue = sizeInput.value || sizeInput.placeholder;
         const colorValue = colorInput.value || colorInput.placeholder;
 
-        // Инъекция стиля на текущую вкладку
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             chrome.scripting.executeScript({
                 target: { tabId: tabs[0].id },
                 func: addCustomStyle,
                 args: [sizeValue, colorValue]
+            });
         });
-    });
     }
-    else {
+}
+
+// Обработчик для переключения кнопки
+function toggleBorders() {
+    if (!showingElements) {
+        // Включаем границы
+        showingElements = true;
+        toggleBtn.classList.remove("showElements");
+        toggleBtn.classList.add("hideElements");
+        toggleBtn.textContent = "Hide borders";
+        applyBorders();
+    } else {
+        // Отключаем границы
         showingElements = false;
         toggleBtn.classList.remove("hideElements");
         toggleBtn.classList.add("showElements");
         toggleBtn.textContent = "Show borders";
+
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             chrome.scripting.executeScript({
                 target: { tabId: tabs[0].id },
@@ -85,14 +66,21 @@ toggleBtn.addEventListener('click', () => {
             });
         });
     }
-    console.log(showingElements);
-});
+}
 
-// Функция для обновления значения инпута color
+// Привязка событий к кнопке
+toggleBtn.addEventListener('click', toggleBorders);
+
+// Автоматическое обновление при изменении значений инпутов или выборе цвета
+sizeInput.addEventListener('input', applyBorders);
+colorInput.addEventListener('input', applyBorders);
+
+// Функция для обновления значения инпута color по клику на квадрат
 function updateColorInput(event) {
     const square = event.target;
     const color = square.style.backgroundColor;
     colorInput.value = color; // Обновляем значение инпута
+    applyBorders(); // Автоматически применяем изменения
 }
 
 // Получаем все квадраты и добавляем к ним обработчики событий
