@@ -7,15 +7,26 @@ body {
 }
 
 button {
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     width:80%;
     color:white;
-    border-width:0px;
+    border: 2px solid grey; /* Без границы по умолчанию */
     border-radius:20px;
     padding:5px;
     font-weight: bold;
     cursor:pointer;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: linear-gradient(to right, #2b5876 0%, #4e4376  51%, #2b5876  100%);
+    transition: background-color 0.1s ease, border 0.1s ease; /* Плавный переход */
 }
+
+button:hover {
+    border: 2px solid black; /* Граница появляется при наведении */
+}
+
 .on {
     background-image: linear-gradient(to right, #2b5876 0%, #4e4376  51%, #2b5876  100%);
 }
