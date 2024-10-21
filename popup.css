@@ -1,24 +1,24 @@
 body {
-    background-color:rgb(250, 250, 250);
-    text-align:center;
-    width:200px;
-    justify-content: center; /* Центрируем контейнер по горизонтали */
-    align-items: center; /* Центрируем контейнер по вертикали */
+    background-color: rgb(250, 250, 250);
+    text-align: center;
+    width: 250px; /* Увеличим ширину, чтобы элементы не были слишком тесными */
+    margin: 20px auto; /* Центрирование контейнера по горизонтали */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрирование контейнера по вертикали */
 }
 
 .btn {
     margin-top: 10px;
     margin-bottom: 10px;
-    width:80%;
-    color:white;
+    width: 80%;
+    color: white;
     border: 2px solid grey; /* Без границы по умолчанию */
-    border-radius:20px;
-    padding:5px;
-    font-weight: bold;
-    cursor:pointer;
+    border-radius: 20px;
     padding: 10px 20px;
-    font-size: 14px;
     font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
     background-color: darkgrey;
     transition: background-color 0.1s ease, border 0.1s ease; /* Плавный переход */
 }
@@ -28,10 +28,11 @@ body {
 }
 
 .showElements {
-    background-image: linear-gradient(to right, #2b5876 0%, #4e4376  51%, #2b5876  100%);
+    background-image: linear-gradient(to right, #2b5876 0%, #4e4376 51%, #2b5876 100%);
 }
+
 .hideElements {
-    background-image: linear-gradient(to right, #e52d27 0%, #b31217  51%, #e52d27  100%);
+    background-image: linear-gradient(to right, #e52d27 0%, #b31217 51%, #e52d27 100%);
 }
 
 input {
@@ -39,29 +40,54 @@ input {
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 14px;
-    border-width:1px;
-    border-radius:10px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin: 5px 0; /* Добавим отступы сверху и снизу */
+}
+
+/* Контейнер для цветных квадратов */
+.container {
+    display: flex;
+    justify-content: space-between; /* Равномерное распределение квадратов */
+    align-items: center; /* Выровнять элементы по вертикали */
+    gap: 5px; /* Отступ между квадратами */
+    margin-bottom: 10px;
+}
+
+/* Стиль квадратов с цветами */
+.square {
+    width: 20px; /* Ширина каждого квадрата */
+    height: 20px; /* Высота каждого квадрата */
+    border: 1px solid grey;
+    cursor: pointer;
+}
+
+.square:hover {
+    border: 1px solid black;
+}
+
+/* Выравнивание поля HEX и color picker */
+.color-picker-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Расстояние между HEX инпутом и color picker */
+    justify-content: center; /* Центрирование элементов */
+}
+
+#color {
+    flex: 1; /* Поле HEX занимает больше места */
+}
+
+#colorPicker {
+    width: 40px; /* Фиксированная ширина для color picker */
+    height: 40px; /* Фиксированная высота для color picker */
+    border: none; /* Убираем стандартную границу */
+    cursor: pointer; /* Указываем, что это элемент для клика */
+    padding: 0; /* Убираем внутренние отступы */
 }
 
 p {
     text-align: center;
     font-size: 14px;
-}
-
-.container {
-    display: flex; /* Используем Flexbox для выравнивания квадратов */
-    justify-content: space-between; /* Равномерное распределение квадратов */
-    align-items: center; /* Выровнять элементы по вертикали */
-    gap: flex; /* Отступ между квадратами */
-    margin-bottom: 5px;
-}
-
-.square {
-    width: 20px; /* Ширина каждого квадрата */
-    height: 20px; /* Высота каждого квадрата */
-    border: 1px solid grey;
-    cursor:pointer;
-}
-.square:hover {
-    border: 1px solid black;
+    margin: 5px 0; /* Отступы сверху и снизу */
 }
